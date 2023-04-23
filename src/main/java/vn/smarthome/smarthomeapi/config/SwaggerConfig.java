@@ -18,7 +18,7 @@ public class SwaggerConfig {
 //    public Docket api() {
 //        return new Docket(DocumentationType.SWAGGER_2)
 //                .select()
-//                .apis(RequestHandlerSelectors.basePackage("vn.SmartHome.SmartHomeAPI.controller"))
+//                .apis(RequestHandlerSelectors.basePackage("vn.smarthome.smarthomeapi.controller"))
 //                .paths(PathSelectors.any())
 //                .build();
 //    }
