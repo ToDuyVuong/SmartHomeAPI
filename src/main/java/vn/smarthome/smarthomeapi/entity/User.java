@@ -37,14 +37,19 @@ public class User {
 //	@GeneratedValue(strategy = GenerationType.IDENTITY)
 //    private Integer id;
 
-    @Column(name = "password",columnDefinition = "nvarchar(1111)")
-    private String password;
+
 
     @Column(name = "user_Name", columnDefinition = "nvarchar(1111)")
     private String username;
 
+    @Column(name = "password",columnDefinition = "nvarchar(1111)")
+    private String password;
+
     @Column(name = "avatar", columnDefinition = "nvarchar(1111)")
     private String avatar;
+
+    @Column(name = "gender", columnDefinition = "nvarchar(1111)")
+    private boolean gender;
 
     @Column(name = "email", columnDefinition = "nvarchar(1111)")
     private String email;

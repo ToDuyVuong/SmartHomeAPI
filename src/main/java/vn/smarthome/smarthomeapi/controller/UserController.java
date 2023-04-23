@@ -28,8 +28,8 @@ public class UserController {
 //    @Autowired
 //    CloudinaryService cloudinaryService;
 
-//    @PostMapping(path = "/register", consumes = "application/x-www-form-urlencoded")
-@PostMapping(path = "/register", consumes = "application/json")
+    @PostMapping(path = "/register", consumes = "application/x-www-form-urlencoded")
+//@PostMapping(path = "/register", consumes = "application/json")
     public ResponseEntity<User> register(@RequestBody UserModel userModel) {
         User user = userService.findById(userModel.getId());
         if (user != null) {
@@ -40,10 +40,11 @@ public class UserController {
 
             User newUser = new User();
             newUser.setUsername(userModel.getUsername());
-            newUser.setId("íad");
+            newUser.setId("id" + userModel.getUsername());
             newUser.setPassword(userModel.getPassword());
             newUser.setEmail("email");
             newUser.setAvatar(avatar);
+            newUser.setGender(true);
             newUser.setPhoneNumber("0");
             newUser.setAddress("DiaChi");
 
