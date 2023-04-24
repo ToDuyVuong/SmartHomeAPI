@@ -27,13 +27,13 @@ public class SmartHomeApiApplication {
 
         SpringApplication.run(SmartHomeApiApplication.class, args);
         System.out.println("-----------------------------------------------------------");
-        System.out.println("🚀 Server ready at http://localhost:8080");
-        System.out.println("🚀 Api doc ready at http://localhost:8080/swagger-ui.html ");
+        System.out.println(" 🚀 Server ready at http://localhost:8085");
+        System.out.println(" 🚀 Api doc ready at http://localhost:8085/swagger-ui.html ");
     }
-//    @Bean
-//    public ModelMapper modelMapper() {
-//        return new ModelMapper();
-//    }
+    @Bean
+    public ModelMapper modelMapper() {
+        return new ModelMapper();
+    }
 
 //    @Bean
 //    public Cloudinary cloudinaryConfig() {
