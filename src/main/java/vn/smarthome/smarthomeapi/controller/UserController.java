@@ -36,32 +36,31 @@ public class UserController {
 
         User user = userService.findById(userModel.getId());
         if (user != null) {
+            System.out.println("User already exists" + user.getAvatar());
             return new ResponseEntity<>(null, HttpStatus.OK);
         } else {
 //            String encodedValue = Base64.getEncoder().encodeToString(password.getBytes());
-        String avatar = "https://haycafe.vn/wp-content/uploads/2022/02/Avatar-trang-den.png";
+//        String avatar = "https://haycafe.vn/wp-content/uploads/2022/02/Avatar-trang-den.png";
 
-        User newUser = new User();
-        newUser.setUsername(userModel.getUsername());
-        newUser.setId("id" + userModel.getUsername());
-        newUser.setPassword(userModel.getPassword());
-        newUser.setEmail("email");
-        newUser.setAvatar(avatar);
-        newUser.setGender(true);
-        newUser.setPhoneNumber("0");
-        newUser.setAddress("DiaChi");
+            User newUser = new User();
+            newUser.setId(userModel.getId());
+            newUser.setUsername(userModel.getUsername());
+            newUser.setPassword(userModel.getPassword());
+            newUser.setAvatar(userModel.getAvatar());
+            newUser.setGender(userModel.getGender());
+            newUser.setEmail(userModel.getEmail());
+            newUser.setPhoneNumber(userModel.getPhoneNumber());
+            newUser.setAddress(userModel.getAddress());
 
-        userService.saveUser(newUser);
+            userService.saveUser(newUser);
 
-        System.out.println(newUser.getId());
-        System.out.println(newUser.getUsername());
-        System.out.println(newUser.getPhoneNumber());
+            System.out.println(newUser.getId());
+            System.out.println(newUser.getUsername());
+            System.out.println(newUser.getPhoneNumber());
 
-        return new ResponseEntity<>(newUser, HttpStatus.OK);
+            return new ResponseEntity<>(newUser, HttpStatus.OK);
         }
     }
-
-
 
 
     //http://localhost:8085/get

@@ -18,7 +18,7 @@ public class UserModel {
 
     private String avatar;
 
-    private boolean gender;
+    private String gender;
 
     private String email;
 

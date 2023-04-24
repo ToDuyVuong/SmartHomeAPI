@@ -49,7 +49,7 @@ public class User {
     private String avatar;
 
     @Column(name = "gender", columnDefinition = "nvarchar(1111)")
-    private boolean gender;
+    private String gender;
 
     @Column(name = "email", columnDefinition = "nvarchar(1111)")
     private String email;
