@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import vn.smarthome.smarthomeapi.entity.Category;
 import vn.smarthome.smarthomeapi.entity.OrderItem;
+import vn.smarthome.smarthomeapi.entity.ProductImage;
 
 import java.util.HashSet;
 import java.util.List;
@@ -17,9 +18,9 @@ public class ProductModel {
     private Integer productId;
     private String name;
     private String description;
-    private String image;
+    private List<ProductImage> images;
     private Long price;
     private int quantity;
     private Category category;
-    private List<OrderItem> orderItems;
+//    private List<OrderItem> orderItems;
 }

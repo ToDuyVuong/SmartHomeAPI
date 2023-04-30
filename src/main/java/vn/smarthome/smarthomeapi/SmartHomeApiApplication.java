@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 import com.cloudinary.Cloudinary;
 
@@ -29,6 +31,14 @@ public class SmartHomeApiApplication {
         System.out.println("-----------------------------------------------------------");
         System.out.println(" 🚀 Server ready at http://localhost:8085");
         System.out.println(" 🚀 Api doc ready at http://localhost:8085/swagger-ui.html ");
+
+
+        try {
+            InetAddress ip = InetAddress.getLocalHost();
+            System.out.println("IP Address: " + ip.getHostAddress());
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
     }
     @Bean
     public ModelMapper modelMapper() {

@@ -1,8 +1,7 @@
 package vn.smarthome.smarthomeapi.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -26,8 +25,6 @@ public class Product {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "image")
-    private String image;
 
     @Column(name = "price")
     private Long price;
@@ -35,15 +32,22 @@ public class Product {
     @Column(name = "quantity")
     private int quantity;
 
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private List<ProductImage> images;
 
-    // relationship with Category
-    @ManyToOne(targetEntity = Category.class, fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id", referencedColumnName = "category_id", nullable = false, foreignKey = @ForeignKey(name = "FK_category_product"))
+    //    // relationship with Category
+//    @ManyToOne(targetEntity = Category.class, fetch = FetchType.LAZY)
+//    @JoinColumn(name = "category_id", referencedColumnName = "category_id", nullable = false, foreignKey = @ForeignKey(name = "FK_category_product"))
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @JsonIgnore
     private Category category;
 
-    // relationship with OrderItem
-    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
-    private List<OrderItem> orderItems;
+//    // relationship with OrderItem
+//    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+//    private List<OrderItem> orderItems;
 
     //relationship with Cart
 //    @ManyToMany(mappedBy = "products", fetch = FetchType.LAZY)
