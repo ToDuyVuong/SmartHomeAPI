@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Categories</title>
+
+    <link rel="stylesheet" href="/css/category-list.css" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+          integrity="sha512-wfB9XpG1e3fLXMp8gAaNGhrC12wP+s+0QvOzR+Dl9XJ97K0q3PMx/i8M1HgL6KwdbJcMrZv2/8zWYdX9TRaLhQ=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+
+
+</head>
+<body>
+<h1>Categories</h1>
+<a type="button" th:href="@{/category/add}" class="btn btn-primary">Add Category</a>
+<table>
+    <thead>
+    <tr>
+        <th class="category-id">ID</th>
+        <th class="category-name">Name</th>
+        <th class="category-description">Description</th>
+        <th class="category-image">Image</th>
+        <th class="category-actions">Actions</th>
+        <!--    <th>Actiowwwwns</th>-->
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="category : ${categories}">
+        <td class="category-id" th:text="${category.categoryId}"></td>
+        <td class="category-name" th:text="${category.name}"></td>
+        <td class="category-description" th:text="${category.description}"></td>
+        <td class="category-image"><img th:src="${category.image}" alt="Category Image"></td>
+
+        <td class="category-actions">
+            <a th:href="@{/category/edit/{categoryId}(categoryId=${category.categoryId})}">
+                <i class="fas fa-edit"></i> Sửa
+            </a>
+            <a th:href="@{/category/delete/{categoryId}(categoryId=${category.categoryId})}">
+                <i class="fas fa-trash"></i> Xóa
+            </a>
+        </td>
+
+<!--        <td class="category-actions">-->
+
+<!--            <a th:href="@{/categories/edit/{categoryId}(categoryId=${category.categoryId})}">Edit</a>-->
+<!--            <a th:href="@{/categories/delete/{categoryId}(categoryId=${category.categoryId})}">Delete</a>-->
+<!--        </td> &lt;!&ndash; Thêm các nút Xóa và Sửa cho mỗi hàng &ndash;&gt;-->
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

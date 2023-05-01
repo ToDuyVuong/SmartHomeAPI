@@ -24,4 +24,7 @@ public interface ICategoryService {
 
     public Category saveOrUpdate(Category category);
 
+    void deleteById(Integer integer);
+
+    void delete(Category entity);
 }

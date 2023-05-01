@@ -85,4 +85,14 @@ public class CategoryServiceImpl implements ICategoryService {
             }
         }
     }
+
+    @Override
+    public void deleteById(Integer integer) {
+        categoryRepository.deleteById(integer);
+    }
+
+    @Override
+    public void delete(Category entity) {
+        categoryRepository.delete(entity);
+    }
 }
