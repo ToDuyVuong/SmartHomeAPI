@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import vn.smarthome.smarthomeapi.entity.Category;
 import vn.smarthome.smarthomeapi.entity.Product;
@@ -23,13 +24,20 @@ public class ProductController {
     IProductService productService;
 
     @GetMapping("/getProductPupularIndex")
-
-
-
-
     public ResponseEntity<List<Product>> getProductPupularIndex(){
         List<Product> list = productService.findAll();
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
+    @GetMapping("getProductByCategory")
+    public ResponseEntity<List<Product>> getProductByCategory(@RequestParam String categoryId){
+        List<Product> list = productService.findByCategoryCategoryId(Integer.parseInt(categoryId));
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+
+    @GetMapping("getAllProduct")
+    public ResponseEntity<List<Product>> getAllProduct(){
+        List<Product> list = productService.findAll();
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
 }

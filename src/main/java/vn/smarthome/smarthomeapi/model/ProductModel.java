@@ -7,6 +7,8 @@ import vn.smarthome.smarthomeapi.entity.Category;
 import vn.smarthome.smarthomeapi.entity.OrderItem;
 import vn.smarthome.smarthomeapi.entity.ProductImage;
 
+import javax.persistence.Column;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -22,5 +24,8 @@ public class ProductModel {
     private Long price;
     private int quantity;
     private Category category;
+    private int active;
+    private Date createdDate;
+    private int sold;
 //    private List<OrderItem> orderItems;
 }

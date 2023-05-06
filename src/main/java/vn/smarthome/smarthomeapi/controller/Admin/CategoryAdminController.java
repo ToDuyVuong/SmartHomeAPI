@@ -2,7 +2,6 @@ package vn.smarthome.smarthomeapi.controller.Admin;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import vn.smarthome.smarthomeapi.entity.Category;
@@ -35,7 +34,7 @@ public class CategoryAdminController {
     public ModelAndView showCategories(Model model) {
         List<Category> categories = categoryService.findAll();
         model.addAttribute("categories", categories);
-        return new ModelAndView ("category-list");
+        return new ModelAndView ("list-category");
     }
 
     @GetMapping("/edit/{categoryId}")

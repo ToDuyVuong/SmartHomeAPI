@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <!-- Basic Page Needs
+    ================================================== -->
+    <title>Add product</title>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- CSS
+    ================================================== -->
+    <link rel="stylesheet" href="/listeo/css/style.css">
+    <link rel="stylesheet" href="/listeo/css/main-color.css" id="colors">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <style>
+    </style>
+</head>
+
+<body>
+
+
+<!-- Content
+================================================== -->
+
+
+<form action="/product/add" method="post"
+      enctype="multipart/form-data">
+    <!-- Titlebar -->
+    <div id="titlebar">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Thêm sản phẩm mới</h2>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+
+            <div id="add-listing">
+
+                <!-- Section -->
+                <div class="add-listing-section">
+
+                    <!-- Headline -->
+                    <div class="add-listing-headline">
+                        <h3>
+                            <i class="sl sl-icon-doc"></i> Nhập thông tin sản phẩm
+                        </h3>
+                    </div>
+
+                    <!-- Title -->
+                    <div class="row with-forms">
+                        <div class="col-md-12">
+                            <h5>Tên sản phẩm phẩm</h5>
+                            <input name="product_name" class="search-field" type="text"
+                                   value="" placeholder="Tên sản phẩm phẩm"/>
+                        </div>
+                    </div>
+
+                    <!-- Row -->
+                    <div class="row with-forms">
+                        <!-- Price -->
+                        <div class="col-md-4">
+                            <h5>Giá</h5>
+                            <input name="price" type="text" placeholder="Giá">
+                        </div>
+
+                        <div class="col-md-4">
+                            <h5>Số lượng</h5>
+                            <input name="availability" type="text"
+                                   placeholder="Số lượng">
+                        </div>
+                        <!-- Status -->
+                        <div class="col-md-4">
+                            <h5>Loại</h5>
+                            <select name="category" class="chosen-select-no-single">
+                                <option value="1" label=""
+                                        th:text="${listCategories[0].name}"></option>
+                                <th:block th:each="y : ${listCategories}">
+                                    <option th:value="${y.CategoryId}" th:if="${yStat.index >0}"
+                                            th:text="${y.name}"></option>
+                                </th:block>
+                            </select>
+                        </div>
+
+                    </div>
+                    <!-- Row / End -->
+
+                </div>
+                <!-- Section / End -->
+
+                <!-- Section -->
+                <div class="add-listing-section margin-top-45">
+
+
+                    <!-- Description -->
+                    <div class="form">
+                        <h5>Chi tiết sản phẩm</h5>
+                        <textarea name="description" class="WYSIWYG" cols="40"
+                                  rows="3" id="summary" spellcheck="true"
+                                  placeholder="Chi tiết sản phẩm"></textarea>
+                    </div>
+                </div>
+                <!-- Section / End -->
+
+                <!-- Section -->
+                <div class="add-listing-section margin-top-45">
+
+                    <!-- Headline -->
+                    <div class="add-listing-headline">
+                        <h3>
+                            <i class="sl sl-icon-picture"></i> Hình ảnh
+                        </h3>
+                    </div>
+
+                    <!-- Dropzone -->
+                    <div class="submit-section">
+
+                        <div class="upload__box">
+                            <div class="upload__btn-box">
+                                <label class="upload__btn"
+                                       style="background: #00a948">
+                                    <p style="margin-bottom: 0px;">Chọn ảnh</p> <input
+                                        name="listImage" accept="image/*" type="file"
+                                        data-max_length="20" class="upload__inputfile" multiple>
+                                </label>
+                            </div>
+                            <div class="upload__img-wrap"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Section / End -->
+
+
+                <button class="button preview"
+                        style="background: #6a7dfe">
+                    Thêm sản phẩm mới <i class="fa fa-arrow-circle-right"></i>
+                </button>
+
+
+            </div>
+        </div>
+
+        <!-- Copyrights -->
+        <div class="col-md-12">
+            <div class="copyrights"></div>
+        </div>
+
+    </div>
+</form>
+<a href="/product/list">
+    <button class="button preview" style="background: #6a7dfe">
+        Quay lại <i class="fa fa-arrow-circle-left"></i>
+    </button>
+</a>
+<br>
+
+
+<!-- Scripts
+================================================== -->
+<script type="text/javascript" src="scripts/jquery-3.6.0.min.js"></script>
+<script type="text/javascript"
+        src="scripts/jquery-migrate-3.3.2.min.js"></script>
+<script type="text/javascript" src="scripts/mmenu.min.js"></script>
+<script type="text/javascript" src="scripts/chosen.min.js"></script>
+<script type="text/javascript" src="scripts/slick.min.js"></script>
+<script type="text/javascript" src="scripts/rangeslider.min.js"></script>
+<script type="text/javascript" src="scripts/magnific-popup.min.js"></script>
+<script type="text/javascript" src="scripts/waypoints.min.js"></script>
+<script type="text/javascript" src="scripts/counterup.min.js"></script>
+<script type="text/javascript" src="scripts/jquery-ui.min.js"></script>
+<script type="text/javascript" src="scripts/tooltips.min.js"></script>
+<script type="text/javascript" src="scripts/custom.js"></script>
+
+
+<!-- Opening hours added via JS (this is only for demo purpose) -->
+<script>
+    $(".opening-day.js-demo-hours .chosen-select").each(
+        function () {
+            $(this).append(
+                '' + '<option></option>'
+                + '<option>Closed</option>'
+                + '<option>1 AM</option>'
+                + '<option>2 AM</option>'
+                + '<option>3 AM</option>'
+                + '<option>4 AM</option>'
+                + '<option>5 AM</option>'
+                + '<option>6 AM</option>'
+                + '<option>7 AM</option>'
+                + '<option>8 AM</option>'
+                + '<option>9 AM</option>'
+                + '<option>10 AM</option>'
+                + '<option>11 AM</option>'
+                + '<option>12 AM</option>'
+                + '<option>1 PM</option>'
+                + '<option>2 PM</option>'
+                + '<option>3 PM</option>'
+                + '<option>4 PM</option>'
+                + '<option>5 PM</option>'
+                + '<option>6 PM</option>'
+                + '<option>7 PM</option>'
+                + '<option>8 PM</option>'
+                + '<option>9 PM</option>'
+                + '<option>10 PM</option>'
+                + '<option>11 PM</option>'
+                + '<option>12 PM</option>');
+        });
+</script>
+
+<!-- DropZone | Documentation: http://dropzonejs.com -->
+<script type="text/javascript" src="scripts/dropzone.js"></script>
+
+
+<script>
+    jQuery(document).ready(function () {
+        ImgUpload();
+    });
+
+    function ImgUpload() {
+        var imgWrap = "";
+        var imgArray = [];
+
+        $('.upload__inputfile')
+            .each(
+                function () {
+                    $(this)
+                        .on(
+                            'change',
+                            function (e) {
+                                imgWrap = $(this)
+                                    .closest(
+                                        '.upload__box')
+                                    .find(
+                                        '.upload__img-wrap');
+                                var maxLength = $(this)
+                                    .attr(
+                                        'data-max_length');
+
+                                var files = e.target.files;
+                                var filesArr = Array.prototype.slice
+                                    .call(files);
+                                var iterator = 0;
+                                filesArr
+                                    .forEach(function (
+                                        f, index) {
+
+                                        if (!f.type
+                                            .match('image.*')) {
+                                            return;
+                                        }
+
+                                        if (imgArray.length > maxLength) {
+                                            return false
+                                        } else {
+                                            var len = 0;
+                                            for (var i = 0; i < imgArray.length; i++) {
+                                                if (imgArray[i] !== undefined) {
+                                                    len++;
+                                                }
+                                            }
+                                            if (len > maxLength) {
+                                                return false;
+                                            } else {
+                                                imgArray
+                                                    .push(f);
+
+                                                var reader = new FileReader();
+                                                reader.onload = function (
+                                                    e) {
+                                                    var html = "<div class='upload__img-box'><div style='background-image: url("
+                                                        + e.target.result
+                                                        + ")' data-number='"
+                                                        + $(".upload__img-close").length
+                                                        + "' data-file='"
+                                                        + f.name
+                                                        + "' class='img-bg'><div class='upload__img-close'></div></div></div>";
+                                                    imgWrap
+                                                        .append(html);
+                                                    iterator++;
+                                                }
+                                                reader
+                                                    .readAsDataURL(f);
+                                            }
+                                        }
+                                    });
+                            });
+                });
+
+        $('body').on('click', ".upload__img-close", function (e) {
+            var file = $(this).parent().data("file");
+            for (var i = 0; i < imgArray.length; i++) {
+                if (imgArray[i].name === file) {
+                    imgArray.splice(i, 1);
+                    break;
+                }
+            }
+            $(this).parent().parent().remove();
+        });
+    }
+</script>
+</body>
+</html>

@@ -12,7 +12,11 @@
 </head>
 <body>
 <h1>Categories</h1>
-<a type="button" th:href="@{/category/add}" class="btn btn-primary">Add Category</a>
+<button>
+    <a th:href="@{/category/add}" class="btn btn-primary">Add Category</a>
+</button>
+<br>
+<br>
 <table>
     <thead>
     <tr>
@@ -40,11 +44,11 @@
             </a>
         </td>
 
-<!--        <td class="category-actions">-->
+        <!--        <td class="category-actions">-->
 
-<!--            <a th:href="@{/categories/edit/{categoryId}(categoryId=${category.categoryId})}">Edit</a>-->
-<!--            <a th:href="@{/categories/delete/{categoryId}(categoryId=${category.categoryId})}">Delete</a>-->
-<!--        </td> &lt;!&ndash; Thêm các nút Xóa và Sửa cho mỗi hàng &ndash;&gt;-->
+        <!--            <a th:href="@{/categories/edit/{categoryId}(categoryId=${category.categoryId})}">Edit</a>-->
+        <!--            <a th:href="@{/categories/delete/{categoryId}(categoryId=${category.categoryId})}">Delete</a>-->
+        <!--        </td> &lt;!&ndash; Thêm các nút Xóa và Sửa cho mỗi hàng &ndash;&gt;-->
     </tr>
     </tbody>
 </table>

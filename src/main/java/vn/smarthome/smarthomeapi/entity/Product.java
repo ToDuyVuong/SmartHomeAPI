@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -31,6 +32,14 @@ public class Product {
 
     @Column(name = "quantity")
     private int quantity;
+
+    @Column(name = "active")
+    private int active;
+    @Column(name = "created_Date")
+    private Date createdDate;
+
+    @Column(name = "sold")
+    private int sold;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<ProductImage> images;
