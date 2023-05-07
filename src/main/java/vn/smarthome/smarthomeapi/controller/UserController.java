@@ -10,10 +10,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import vn.smarthome.smarthomeapi.entity.User;
 import vn.smarthome.smarthomeapi.model.UserModel;
+import vn.smarthome.smarthomeapi.response.LoginResponse;
 import vn.smarthome.smarthomeapi.service.IUserService;
 
 import java.util.Base64;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/user")
@@ -61,6 +63,31 @@ public class UserController {
             return new ResponseEntity<>(newUser, HttpStatus.OK);
         }
     }
+    @PostMapping(path = "/login", consumes = MediaType.APPLICATION_JSON_VALUE)
+
+    public ResponseEntity<LoginResponse> login(UserModel userModel){
+        //check if user exist
+        User user = userService.findByEmail(userModel.getEmail());
+        LoginResponse loginResponse = new LoginResponse(user, "");
+
+        if (user == null){
+            loginResponse.setMessage("Not Found");
+            return new ResponseEntity<>(loginResponse, HttpStatus.OK);
+        }
+        else{
+            if (Objects.equals(userModel.getPassword(), user.getPassword())){
+                loginResponse.setMessage("Success");
+            }
+            else{
+                loginResponse.setMessage("Incorrect");
+            }
+            System.out.println(userModel.getPassword() + " " + user.getPassword());
+            return new ResponseEntity<>(loginResponse, HttpStatus.OK);
+        }
+        //check password is correct
+
+    }
+
 
 
     //http://localhost:8085/get
