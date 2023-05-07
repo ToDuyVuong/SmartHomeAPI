@@ -67,7 +67,7 @@ public class UserController {
 
     public ResponseEntity<LoginResponse> login(@RequestBody UserModel userModel){
 
-        User user = userService.findByEmail(userModel.getEmail());
+        User user = userService.findById(userModel.getId());
         LoginResponse loginResponse = new LoginResponse(user, "");
 
         if (user == null){
