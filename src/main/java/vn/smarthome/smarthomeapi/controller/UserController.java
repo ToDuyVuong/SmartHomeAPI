@@ -65,8 +65,8 @@ public class UserController {
     }
     @PostMapping(path = "/login", consumes = MediaType.APPLICATION_JSON_VALUE)
 
-    public ResponseEntity<LoginResponse> login(UserModel userModel){
-        //check if user exist
+    public ResponseEntity<LoginResponse> login(@RequestBody UserModel userModel){
+
         User user = userService.findByEmail(userModel.getEmail());
         LoginResponse loginResponse = new LoginResponse(user, "");
 
@@ -80,11 +80,10 @@ public class UserController {
             }
             else{
                 loginResponse.setMessage("Incorrect");
+                loginResponse.setUser(null);
             }
-            System.out.println(userModel.getPassword() + " " + user.getPassword());
             return new ResponseEntity<>(loginResponse, HttpStatus.OK);
         }
-        //check password is correct
 
     }
 
