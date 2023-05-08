@@ -68,6 +68,9 @@ public class UserController {
     public ResponseEntity<LoginResponse> login(@RequestBody UserModel userModel){
 
         User user = userService.findById(userModel.getId());
+
+        System.out.println(userModel.getId());
+        System.out.println(userModel.getPassword());
         LoginResponse loginResponse = new LoginResponse(user, "");
 
         if (user == null){
