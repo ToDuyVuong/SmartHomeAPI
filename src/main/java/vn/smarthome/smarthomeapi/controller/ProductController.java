@@ -32,6 +32,12 @@ public class ProductController {
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
+    @GetMapping("/productDetail")
+    public ResponseEntity<Product> getProductDetail(@RequestParam String productId){
+        Product product = productService.findById(Integer.parseInt(productId));
+        return new ResponseEntity<>(product, HttpStatus.OK);
+    }
+
 
 
 
