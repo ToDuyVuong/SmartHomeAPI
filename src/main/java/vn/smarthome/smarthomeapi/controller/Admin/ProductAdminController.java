@@ -12,7 +12,6 @@ import org.springframework.web.servlet.ModelAndView;
 import vn.smarthome.smarthomeapi.entity.Category;
 import vn.smarthome.smarthomeapi.entity.Product;
 import vn.smarthome.smarthomeapi.entity.ProductImage;
-import vn.smarthome.smarthomeapi.entity.User;
 import vn.smarthome.smarthomeapi.service.CloudinaryService;
 import vn.smarthome.smarthomeapi.service.ICategoryService;
 import vn.smarthome.smarthomeapi.service.IProductImageService;

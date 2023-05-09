@@ -1,28 +1,29 @@
 package vn.smarthome.smarthomeapi.service.Impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
-import vn.smarthome.smarthomeapi.entity.CartItem;
-import vn.smarthome.smarthomeapi.repository.CartItemRepository;
-import vn.smarthome.smarthomeapi.service.ICartItemService;
+import vn.smarthome.smarthomeapi.entity.Cart;
+import vn.smarthome.smarthomeapi.entity.Product;
+import vn.smarthome.smarthomeapi.entity.User;
+import vn.smarthome.smarthomeapi.repository.CartRepository;
+import vn.smarthome.smarthomeapi.service.ICartService;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CartItemServiceImpl implements ICartItemService {
+public class CartServiceImpl implements ICartService {
 
     @Autowired
-    CartItemRepository cartItemRepository;
+    CartRepository cartItemRepository;
 
-    public CartItemServiceImpl(CartItemRepository cartItemRepository) {
+    public CartServiceImpl(CartRepository cartItemRepository) {
 
         this.cartItemRepository = cartItemRepository;
     }
 
     @Override
-    public void saveCartItem(CartItem cartItemEntity) {
+    public void saveCartItem(Cart cartItemEntity) {
         cartItemRepository.save(cartItemEntity);
     }
 
@@ -48,17 +49,17 @@ public class CartItemServiceImpl implements ICartItemService {
 //    }
 
     @Override
-    public List<CartItem> getCartItemsByUserId(int id) {
+    public List<Cart> getCartItemsByUserId(int id) {
         return cartItemRepository.findByUserId(id);
     }
 
     @Override
-    public List<CartItem> findAll() {
+    public List<Cart> findAll() {
         return cartItemRepository.findAll();
     }
 
     @Override
-    public Optional<CartItem> findById(Integer cartItemId) {
+    public Optional<Cart> findById(Integer cartItemId) {
         return cartItemRepository.findById(cartItemId);
     }
 
@@ -73,9 +74,23 @@ public class CartItemServiceImpl implements ICartItemService {
     }
 
     @Override
-    public void delete(CartItem entity) {
+    public void delete(Cart entity) {
         cartItemRepository.delete(entity);
     }
 
 
+    @Override
+    public List<Cart> findByUser(User user) {
+        return cartItemRepository.findByUser(user);
+    }
+
+    @Override
+    public Cart findByUserAndProduct(User user, Product product) {
+        return cartItemRepository.findByUserAndProduct(user, product);
+    }
+
+    @Override
+    public <S extends Cart> S save(S entity) {
+        return cartItemRepository.save(entity);
+    }
 }
