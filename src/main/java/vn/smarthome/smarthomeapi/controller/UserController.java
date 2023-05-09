@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.thymeleaf.util.TextUtils;
 import vn.smarthome.smarthomeapi.entity.User;
 import vn.smarthome.smarthomeapi.model.UserModel;
 import vn.smarthome.smarthomeapi.response.LoginResponse;
@@ -33,7 +34,6 @@ public class UserController {
 
 
     @PostMapping(path = "/register", consumes = MediaType.APPLICATION_JSON_VALUE)
-
     public ResponseEntity<User> register(@RequestBody UserModel userModel) {
 
         User user = userService.findById(userModel.getId());
@@ -64,7 +64,6 @@ public class UserController {
         }
     }
     @PostMapping(path = "/login", consumes = MediaType.APPLICATION_JSON_VALUE)
-
     public ResponseEntity<LoginResponse> login(@RequestBody UserModel userModel){
 
         User user = userService.findById(userModel.getId());
@@ -84,10 +83,28 @@ public class UserController {
             }
             return new ResponseEntity<>(loginResponse, HttpStatus.OK);
         }
-
     }
 
+    @PostMapping(path = "/update", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<User> update(@RequestBody UserModel userModel){
+        System.out.println(userModel.getGender());
+        if (userModel == null) return new ResponseEntity<>(null, HttpStatus.OK);
+        User user = new User();
+        user.setId(userModel.getId());
+        user.setPassword(userModel.getPassword());
+        user.setUsername(userModel.getUsername());
+        user.setEmail(userModel.getEmail());
+        user.setPhoneNumber(userModel.getPhoneNumber());
+        user.setAddress(userModel.getAddress());
+        user.setAvatar(userModel.getAvatar());
 
+        User updatedUser = userService.updateUser(user);
+        if (updatedUser.getId() != userModel.getId()){
+            userService.deleteUserById(userModel.getId());
+        }
+
+        return new ResponseEntity<>(updatedUser, HttpStatus.OK);
+    }
 
     //http://localhost:8085/get
     @GetMapping("/get")
