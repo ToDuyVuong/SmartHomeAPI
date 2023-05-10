@@ -1,11 +1,9 @@
 package vn.smarthome.smarthomeapi.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import vn.smarthome.smarthomeapi.entity.Cart;
 import vn.smarthome.smarthomeapi.entity.Product;
 import vn.smarthome.smarthomeapi.entity.User;
@@ -34,7 +32,7 @@ public class CartController {
 
 
         if (existingCart != null) {
-            if(product.getQuantity() < cart.getQuantity()+existingCart.getQuantity()){
+            if (product.getQuantity() < cart.getQuantity() + existingCart.getQuantity()) {
                 cart.setQuantity(product.getQuantity());
                 existingCart.setQuantity(0);
             }
@@ -43,13 +41,30 @@ public class CartController {
             List<Cart> list = cartService.findByUser(user);
             return ResponseEntity.ok(list);
         } else {
-            if(product.getQuantity() < cart.getQuantity()){
+            if (product.getQuantity() < cart.getQuantity()) {
                 cart.setQuantity(product.getQuantity());
             }
             cartService.save(cart);
             List<Cart> list = cartService.findByUser(user);
             return ResponseEntity.ok(list);
         }
+    }
+
+    @GetMapping("/view")
+    public ResponseEntity<List<Cart>> getCartItems(@RequestParam String id) {
+        User user = new User();
+        user.setId(id);
+        if (user != null) {
+            List<Cart> list = cartService.findByUser(user);
+            return new ResponseEntity<List<Cart>>(list, HttpStatus.OK);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @DeleteMapping("/remove/{cartId}")
+    public void removeProductFromCart(@PathVariable("cartId") Integer cartId) {
+        cartService.deleteById(cartId);
     }
 
 }
