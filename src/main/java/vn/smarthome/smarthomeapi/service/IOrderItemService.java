@@ -28,4 +28,6 @@ public interface IOrderItemService {
     List<OrderItem> listOrderItemsByOrderId(int orderId);
     @Query("SELECT c.product.productId FROM OrderItem c WHERE c.order.orderId = :orderId")
     List<Integer> listProductIdByOrderId(int orderId);
+
+    <S extends OrderItem> S save(S entity);
 }

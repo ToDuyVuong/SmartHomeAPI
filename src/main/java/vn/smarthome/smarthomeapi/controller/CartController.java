@@ -24,7 +24,7 @@ public class CartController {
     @Autowired
     IProductService productService;
 
-    @PostMapping("/add")
+    @PostMapping("/addProductToCart")
     public ResponseEntity<List<Cart>> addToCart(@RequestBody Cart cart) {
         User user = userService.findById(cart.getUser().getId());
         Product product = cart.getProduct();
@@ -48,6 +48,25 @@ public class CartController {
             List<Cart> list = cartService.findByUser(user);
             return ResponseEntity.ok(list);
         }
+    }
+
+    @PostMapping("/minusProductToCart")
+    public ResponseEntity<List<Cart>> minusProductToCart(@RequestBody Cart cart) {
+        System.out.println("cartcartcart");
+
+        User user = userService.findById(cart.getUser().getId());
+        Product product = cart.getProduct();
+        Cart existingCart = cartService.findByUserAndProduct(user, product);
+
+            if (product.getQuantity() < cart.getQuantity() + existingCart.getQuantity()) {
+                cart.setQuantity(product.getQuantity());
+                existingCart.setQuantity(0);
+            }
+            existingCart.setQuantity(existingCart.getQuantity() - 1);
+            cartService.save(existingCart);
+            List<Cart> list = cartService.findByUser(user);
+            return ResponseEntity.ok(list);
+
     }
 
     @GetMapping("/view")

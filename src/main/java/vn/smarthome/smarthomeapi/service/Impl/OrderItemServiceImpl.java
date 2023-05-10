@@ -66,5 +66,10 @@ public class OrderItemServiceImpl implements IOrderItemService {
     public List<Integer> listProductIdByOrderId(int orderId){
         return orderItemRepository.listProductIdByOrderId(orderId);
     }
+
+    @Override
+    public <S extends OrderItem> S save(S entity) {
+        return orderItemRepository.save(entity);
+    }
 }
 

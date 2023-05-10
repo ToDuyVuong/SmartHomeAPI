@@ -47,10 +47,14 @@ public class OrderServiceImpl implements IOrderService {
     }
 
     @Override
-
     @Query("SELECT c FROM Order c WHERE c.user.id = :id")
     public List<Order> listOrderByUserId(int id) {
         return orderRepository.listOrderByUserId(id);
+    }
+
+    @Override
+    public <S extends Order> S save(S entity) {
+        return orderRepository.save(entity);
     }
 }
 

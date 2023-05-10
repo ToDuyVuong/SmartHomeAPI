@@ -22,4 +22,5 @@ public interface IOrderService {
     @Query("SELECT c FROM Order c WHERE c.user.id = :id")
     List<Order> listOrderByUserId(int id);
 
+    <S extends Order> S save(S entity);
 }

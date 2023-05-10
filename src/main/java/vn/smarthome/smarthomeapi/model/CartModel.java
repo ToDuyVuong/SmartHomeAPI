@@ -15,4 +15,5 @@ public class CartModel {
     private int quantity;
     private User user;
     private Product product;
+    private boolean selected;
 }

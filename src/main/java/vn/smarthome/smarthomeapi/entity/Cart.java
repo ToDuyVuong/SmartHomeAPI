@@ -28,4 +28,7 @@ public class Cart {
     @JoinColumn(name = "id")
     private User user;
 
+    @Column(nullable = true, name = "selected")
+    private boolean selected;
+
 }
