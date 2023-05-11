@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 import vn.smarthome.smarthomeapi.entity.Order;
+import vn.smarthome.smarthomeapi.entity.User;
 import vn.smarthome.smarthomeapi.repository.OrderRepository;
 import vn.smarthome.smarthomeapi.service.IOrderService;
 
@@ -56,5 +57,16 @@ public class OrderServiceImpl implements IOrderService {
     public <S extends Order> S save(S entity) {
         return orderRepository.save(entity);
     }
+
+    @Override
+    public List<Order> findByUser(User user) {
+        return orderRepository.findByUser(user);
+    }
+
+    @Override
+    public List<Order> findByUserId(String id) {
+        return orderRepository.findByUserId(id);
+    }
+
 }
 

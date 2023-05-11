@@ -9,7 +9,9 @@ import vn.smarthome.smarthomeapi.request.OrderRequest;
 import vn.smarthome.smarthomeapi.service.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/order")
@@ -62,6 +64,34 @@ public class OrderController {
         }
     }
 
+
+    @GetMapping("/listOrder")
+    public ResponseEntity<List<Order>> listOrder(@RequestParam String id) {
+        System.out.println("idUS: " + id);
+        try {
+            User user = userService.findById(id);
+            System.out.println("userOK: " + user.getEmail());
+            List<Order> orders = orderService.findByUser(userService.findById(id));
+            List<Order>  orderList = orderService.findAll();
+            System.out.println("orders: " + orderList);
+            return ResponseEntity.ok(orderList);
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @GetMapping("/test")
+    public ResponseEntity<Map<String, String>> test(@RequestParam String id) {
+        System.out.println("test" + id);
+
+        User user = userService.findById(id);
+        System.out.println("userOK: " + user.getEmail());
+
+
+        return ResponseEntity.ok(Collections.singletonMap("message", "OK"));
+    }
+}
 
 
 //    @PostMapping("/newOrder")
@@ -138,6 +168,6 @@ public class OrderController {
 //        }
 //
 //    }
-
-
-}
+//
+//
+//}

@@ -1,9 +1,9 @@
 package vn.smarthome.smarthomeapi.entity;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -13,11 +13,12 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, name = "order_id")
-
     private Integer orderId;
 
     @Column(name = "order_date")
@@ -26,7 +27,7 @@ public class Order {
     @Column(name = "ship_to")
     private String shipTo;
 
-    @Column(name= "totalprice")
+    @Column(name = "totalprice")
     private Long totalPrice;
 
     @Column(name = "note")
@@ -45,22 +46,20 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private Status status;
 
-    // relationship with OrderItem
-    @OneToMany(targetEntity = OrderItem.class, fetch = FetchType.LAZY, mappedBy = "order")
-    private List<OrderItem> orderItems;
+//    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
+//    private List<OrderItem> orderItems;
 
     // relationship with Customer
-    @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
+//    @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "FK_customer_order"))
+//    @EqualsAndHashCode.Exclude
+//    @ToString.Exclude
     private User user;
 
-//    @PrePersist
-//    public void setPurchaseDate() {
-//        this.orderDate = LocalDate.now();
-//    }
 
     public enum Status {
-        PENDING(0), DELIVERING(1), DELIVERED(2), CANCELED(3);
+        PENDING(0), PROCESSING(1), DELIVERING(2), DELIVERED(3), CANCELED(4);
 
         private int value;
 

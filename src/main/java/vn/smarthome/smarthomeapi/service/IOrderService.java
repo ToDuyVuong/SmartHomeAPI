@@ -3,6 +3,7 @@ package vn.smarthome.smarthomeapi.service;
 
 import org.springframework.data.jpa.repository.Query;
 import vn.smarthome.smarthomeapi.entity.Order;
+import vn.smarthome.smarthomeapi.entity.User;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,4 +24,8 @@ public interface IOrderService {
     List<Order> listOrderByUserId(int id);
 
     <S extends Order> S save(S entity);
+
+    List<Order> findByUser(User user);
+
+    List<Order> findByUserId(String id);
 }
