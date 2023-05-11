@@ -59,7 +59,7 @@ public class Order {
 
 
     public enum Status {
-        PENDING(0), PROCESSING(1), DELIVERING(2), DELIVERED(3), CANCELED(4);
+            PENDING(0), PROCESSING(1), DELIVERING(2), DELIVERED(3), CANCELED(4);
 
         private int value;
 

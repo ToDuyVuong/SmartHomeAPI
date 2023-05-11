@@ -3,6 +3,7 @@ package vn.smarthome.smarthomeapi.service;
 
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.Query;
+import vn.smarthome.smarthomeapi.entity.Order;
 import vn.smarthome.smarthomeapi.entity.OrderItem;
 
 import java.util.List;
@@ -30,4 +31,6 @@ public interface IOrderItemService {
     List<Integer> listProductIdByOrderId(int orderId);
 
     <S extends OrderItem> S save(S entity);
+
+    List<OrderItem> findByOrder(Order order);
 }

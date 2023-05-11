@@ -91,83 +91,21 @@ public class OrderController {
 
         return ResponseEntity.ok(Collections.singletonMap("message", "OK"));
     }
+
+    @GetMapping("/orderDetail")
+    public ResponseEntity<List<OrderItem>> getOrderDetail(@RequestParam String orderId) {
+        System.out.println("orderDetail id: " + orderId);
+        try {
+            List<OrderItem> orderItems = orderItemService.findByOrder(orderService.findById(Integer.parseInt(orderId)).get());
+
+
+            System.out.println("orderDetailorders: " + orderItems);
+            return ResponseEntity.ok(orderItems);
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
 }
 
-
-//    @PostMapping("/newOrder")
-//    public ResponseEntity<Order> addToCart(@RequestBody OrderRequest orderRequest) {
-//
-//        try {
-//            Order order = orderRequest.getOrder();
-//            List<OrderItem> orderItemList = orderRequest.getOrderItemList();
-//
-//            // Save the order
-//            orderService.save(order);
-//
-//            // Process each order item
-//            for (OrderItem orderItem : orderItemList) {
-//                Product product = orderItem.getProduct();
-//
-//                // Check if the requested quantity exceeds the available quantity
-//                int availableQuantity = product.getQuantity();
-//                int requestedQuantity = orderItem.getQuantity();
-//                int quantityToProcess = Math.min(availableQuantity, requestedQuantity);
-//
-//                // Update the order item quantity
-//                orderItem.setQuantity(quantityToProcess);
-//                orderItemService.save(orderItem);
-//
-//                // Update the product quantity and sold values
-//                product.setQuantity(availableQuantity - quantityToProcess);
-//                product.setSold(product.getSold() + quantityToProcess);
-//                productService.save(product);
-//
-//                // Delete the corresponding cart entry
-//                Cart cart = cartService.findByUserAndProduct(order.getUser(), product);
-//                if (cart != null) {
-//                    cartService.delete(cart);
-//                }
-//            }
-//
-//            return ResponseEntity.ok(order);
-//        } catch (Exception e) {
-//            return ResponseEntity.badRequest().build();
-//        }
-//    }
-
-
-//    @PostMapping("/newOrder")
-//    public ResponseEntity<Order> addToCart(@RequestBody OrderRequest orderRequest) {
-//
-//        try {
-//
-//            Order order = orderRequest.getOrder();
-//            List<OrderItem> orderItemList = orderRequest.getOrderItemList();
-//
-//            orderService.save(order);
-//
-//            User user = userService.findById(order.getUser().getId());
-//            for (OrderItem orderItem : orderItemList) {
-//                if (orderItem.getProduct().getQuantity() < orderItem.getQuantity()) {
-//                    orderItem.setQuantity(orderItem.getProduct().getQuantity());
-//                }
-//                orderItemService.save(orderItem);
-//
-//                Product product = orderItem.getProduct();
-//                product.setQuantity(product.getQuantity() - orderItem.getQuantity());
-//                product.setSold(orderItem.getQuantity());
-//                productService.save(product);
-//
-//                Cart cart = cartService.findByUserAndProduct(user, product);
-//                cartService.delete(cart);
-//            }
-//
-//            return ResponseEntity.ok(order);
-//        } catch (Exception e) {
-//            return ResponseEntity.badRequest().build();
-//        }
-//
-//    }
-//
-//
-//}

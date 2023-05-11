@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
+import vn.smarthome.smarthomeapi.entity.Order;
 import vn.smarthome.smarthomeapi.entity.OrderItem;
 import vn.smarthome.smarthomeapi.repository.OrderItemRepository;
 import vn.smarthome.smarthomeapi.service.IOrderItemService;
@@ -70,6 +71,11 @@ public class OrderItemServiceImpl implements IOrderItemService {
     @Override
     public <S extends OrderItem> S save(S entity) {
         return orderItemRepository.save(entity);
+    }
+
+    @Override
+    public List<OrderItem> findByOrder(Order order) {
+        return orderItemRepository.findByOrder(order);
     }
 }
 
