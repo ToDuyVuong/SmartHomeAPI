@@ -9,6 +9,7 @@ import vn.smarthome.smarthomeapi.entity.Product;
 import vn.smarthome.smarthomeapi.service.ICategoryService;
 import vn.smarthome.smarthomeapi.service.IProductService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -24,6 +25,29 @@ public class ProductController {
     public ResponseEntity<List<Product>> getProductPupularIndex(){
         List<Product> list = productService.findAll();
         return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+
+    @GetMapping("/getLatestProduct")
+    public ResponseEntity<List<Product>> getLatestProduct(){
+        List<Product> list = productService.findAll();
+        List<Product> lastFourProducts = new ArrayList<>();
+
+        int a = list.size();
+        int b = 0;
+        while (a > 4) {
+            list.remove(b);
+            b++;
+            a--;
+        }
+
+        int startIndex = Math.max(0, list.size() - 4); // Get the starting index for the loop
+
+        for (int i = list.size() - 1; i > startIndex; i--) {
+            Product product = list.get(i);
+            lastFourProducts.add(product);
+        }
+
+        return new ResponseEntity<>(lastFourProducts, HttpStatus.OK);
     }
 
     @GetMapping("getProductByCategory")

@@ -107,5 +107,30 @@ public class OrderController {
         }
     }
 
+    @PostMapping("/cancelOrder")
+    public ResponseEntity<Order> cancelOrder(@RequestBody Order order) {
+        System.out.println("cancelOrder id: " + order.getOrderId());
+        try {
+            Order order1 = orderService.findById(order.getOrderId()).get();
+            order1.setStatus(Order.Status.CANCELED);
+            orderService.save(order1);
+
+            List<OrderItem> orderItems = orderItemService.findByOrder(order1);
+            for (OrderItem orderItem : orderItems) {
+                Product product = productService.findById(orderItem.getProduct().getProductId()).get();
+                product.setQuantity(product.getQuantity() + orderItem.getQuantity());
+                product.setSold(product.getSold() - orderItem.getQuantity());
+                productService.save(product);
+            }
+
+
+
+            return ResponseEntity.ok(order1);
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
 }
 
