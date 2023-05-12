@@ -70,4 +70,11 @@ public class ProductController {
         List<Product> list = productService.findAll();
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
+
+
+    @GetMapping("/searchProduct")
+    public ResponseEntity<List<Product>> searchProduct(@RequestParam String search){
+        List<Product> list = productService.findByNameContaining(search);
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
 }
