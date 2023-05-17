@@ -32,15 +32,9 @@ public class ProductController {
         List<Product> list = productService.findAll();
         List<Product> lastFourProducts = new ArrayList<>();
 
-        int a = list.size();
-        int b = 0;
-        while (a > 4) {
-            list.remove(b);
-            b++;
-            a--;
-        }
 
-        int startIndex = Math.max(0, list.size() - 4); // Get the starting index for the loop
+
+        int startIndex = Math.max(0, list.size() - 5); // Get the starting index for the loop
 
         for (int i = list.size() - 1; i > startIndex; i--) {
             Product product = list.get(i);

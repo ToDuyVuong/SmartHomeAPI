@@ -74,7 +74,7 @@ public class OrderController {
             List<Order> orders = orderService.findByUser(userService.findById(id));
             List<Order>  orderList = orderService.findAll();
             System.out.println("orders: " + orderList);
-            return ResponseEntity.ok(orderList);
+            return ResponseEntity.ok(orders);
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
             return ResponseEntity.badRequest().build();
