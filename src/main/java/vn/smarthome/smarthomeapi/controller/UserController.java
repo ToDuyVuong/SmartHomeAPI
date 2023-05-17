@@ -99,11 +99,9 @@ public class UserController {
         user.setPhoneNumber(userModel.getPhoneNumber());
         user.setAddress(userModel.getAddress());
         user.setAvatar(userModel.getAvatar());
+        user.setGender(userModel.getGender());
 
         User updatedUser = userService.updateUser(user);
-        if (updatedUser.getId() != userModel.getId()){
-            userService.deleteUserById(userModel.getId());
-        }
 
         return new ResponseEntity<>(updatedUser, HttpStatus.OK);
     }
