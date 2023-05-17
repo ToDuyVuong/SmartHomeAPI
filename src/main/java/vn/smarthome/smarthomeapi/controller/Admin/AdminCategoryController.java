@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/category")
-public class CategoryAdminController {
+public class AdminCategoryController {
 
 
     @Autowired

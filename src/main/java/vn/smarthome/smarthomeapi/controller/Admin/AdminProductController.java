@@ -23,18 +23,16 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/product")
-public class ProductAdminController {
+public class AdminProductController {
 
     @Autowired
     IProductService productService;
     @Autowired
     ICategoryService categoryService;
-
     @Autowired
     HttpSession session;
     @Autowired
     CloudinaryService cloudinaryService;
-
     @Autowired
     IProductImageService productImageService;
 
